@@ -9,13 +9,13 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - /var/jenkins_home/workspace/monitoreo/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus:/etc/prometheus
 
   jenkins:
     build:
       context: .
       dockerfile: Dockerfile.jenkins
-    user: root   # 🔥 CLAVE (soluciona permission denied)
+    user: root
     ports:
       - "8080:8080"
     volumes:
