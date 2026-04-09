@@ -9,7 +9,7 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - /var/jenkins_home/workspace/monitoreo/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /var/jenkins_home/workspace/monitoreo/prometheus.yml:/etc/prometheus/prometheus.yml:ro
 
   jenkins:
     build:
