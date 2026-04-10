@@ -13,7 +13,7 @@ const counter = new client.Counter({
 // SOLO incrementa en rutas específicas (estable)
 app.get("/", (req, res) => {
   counter.inc();
-  res.send("Hola mundo 🚀");
+  res.send("EXAMEN FINAL DEVOPS");
 });
 
 app.get("/usuarios", (req, res) => {
