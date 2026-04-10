@@ -8,25 +8,27 @@ client.collectDefaultMetrics();
 const counter = new client.Counter({
   name: "http_requests_total",
   help: "Total de peticiones",
+  labelNames: ["route"]
 });
 
-// SOLO incrementa en rutas específicas (estable)
+// middleware correcto
+app.use((req, res, next) => {
+  counter.labels({ route: req.path }).inc();
+  next();
+});
+
 app.get("/", (req, res) => {
-  counter.inc();
-  res.send("EXAMEN FINAL DEVOPS");
+  res.send("EXAMEN FINAL DEVOPS - WALTER SANTOS ");
 });
 
 app.get("/usuarios", (req, res) => {
-  counter.inc();
-  res.json([{ id: 1, nombre: "Juan" }]);
+  res.json([{ id: 1, nombre: "Walter" }]);
 });
 
 app.get("/productos", (req, res) => {
-  counter.inc();
   res.json([{ id: 1, nombre: "Laptop" }]);
 });
 
-// metrics limpio
 app.get("/metrics", async (req, res) => {
   res.set("Content-Type", client.register.contentType);
   res.end(await client.register.metrics());
